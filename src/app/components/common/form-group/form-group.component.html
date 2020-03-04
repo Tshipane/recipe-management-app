@@ -1,0 +1,27 @@
+<div class="form-horizontal">
+  <div [ngClass]="{'form-group':true, 'row':!verticalForm, 'zero-margins':readonly}">
+    <label [className]="verticalForm?'':'col-form-label col-sm-'+(12-inputCols)">{{label + (verticalForm ? '' : ':')}}</label>
+    <div [className]="verticalForm?'':'col-sm-'+ inputCols">
+      <div *ngIf="!readonly">
+        <input [type]="getType()" class="form-control underlined" #inputElement
+               (keyup)="changed(inputElement.value)"
+               (click)="setTouched()"
+               [placeholder]="this.createPlaceHolder()"
+               *ngIf="inputType==inputTypeEnum.Text || inputType==inputTypeEnum.Email">
+        <input type="password" class="form-control underlined" #inputElement
+               (keyup)="changed(inputElement.value)"
+               (click)="setTouched()"
+               [placeholder]="this.createPlaceHolder()"
+               *ngIf="inputType==inputTypeEnum.Password||inputType==inputTypeEnum.PasswordConfirm">
+        <textarea class="form-control underlined" #textAreaElement
+                  (keyup)="changed(textAreaElement.value)"
+                  (click)="setTouched()"
+                  *ngIf="inputType==inputTypeEnum.TextArea"></textarea>
+        <span class="text-danger small" *ngIf="invalid()">{{getErrorMessage()}}</span>
+      </div>
+      <div *ngIf="readonly">
+        <input type="text" readonly class="form-control-plaintext" [value]="readonlyValue">
+      </div>
+    </div>
+  </div>
+</div>
