@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+.btn + .btn {
+  margin-left: 5px;
+}
+
+a:focus, a:hover {
+  cursor: pointer !important;
+}
+
+.vertical-spacer {
+  margin-top: 15px;
+}
+
+.card {
+  border: 1px solid rgba(0, 0, 0, .125) !important;
+  border-radius: .25rem !important;
+}
+
+.card.card-default > .card-header {
+  background-color: rgba(0, 0, 0, .03) !important;
+}
+
+.btn {
+  line-height: inherit !important;
+}

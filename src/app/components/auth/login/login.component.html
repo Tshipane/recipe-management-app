@@ -1,0 +1,24 @@
+<div class="card card-default w-50">
+  <div class="card-header">
+    <div class="header-block">
+      <p class="title">Please Login</p>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="alert alert-info">
+      You need to have logged in to manage your recipes.
+    </div>
+    <form [formGroup]="formGroup" (ngSubmit)="login()" novalidate="">
+      <app-form-group label="Email" [formGroup]="formGroup" controlName="emailAddress" [inputType]="inputType.Email"
+                      [verticalForm]="true"></app-form-group>
+      <app-form-group label="Password" [formGroup]="formGroup" controlName="password" [inputType]="inputType.Password"
+                      [verticalForm]="true"></app-form-group>
+      <div class="form-group">
+        <button type="submit" class="btn btn-block btn-primary" [disabled]="formGroup.invalid">Login</button>
+      </div>
+      <div class="form-group">
+        <p class="text-muted text-center">Do not have an account? <a [routerLink]="['/sign-up']">Sign Up</a></p>
+      </div>
+    </form>
+  </div>
+</div>

@@ -12,6 +12,8 @@ import {
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TypeUtility} from '../../../services/utilities/type-utility';
 import {InputType} from '../models/input-type';
+import {KeyValuePair} from '../../../model/common/key-value-pair';
+import {ValidatorType} from '../models/validator-type';
 
 @Component({
   selector: 'app-form-group',
@@ -30,6 +32,9 @@ export class FormGroupComponent implements OnInit, OnChanges {
   formGroup: FormGroup;
   @Input()
   controlName: string;
+
+  @Input()
+  errors: KeyValuePair<ValidatorType, string>[];
 
   @Input()
   label: string;
@@ -63,6 +68,7 @@ export class FormGroupComponent implements OnInit, OnChanges {
     this.inputId = TypeUtility.createGuid();
     this.fireOnChange = true;
     this.verticalForm = false;
+    this.errors = [];
   }
 
   ngOnInit() {
@@ -84,6 +90,11 @@ export class FormGroupComponent implements OnInit, OnChanges {
     });
 
     if (this.inputType == InputType.Email) {
+      if (this.errors.filter((keyValuePair: KeyValuePair<ValidatorType, string>) => {
+        return keyValuePair.key == ValidatorType.Pattern;
+      }).length == 0) {
+        this.errors.push(new KeyValuePair<ValidatorType, string>(ValidatorType.Pattern, 'Email address is not in correct format'));
+      }
 
       const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (formControl.validator != null) {
@@ -154,6 +165,35 @@ export class FormGroupComponent implements OnInit, OnChanges {
   }
 
   getErrorMessage(): string {
+    if (this.errors.length > 0) {
+      if (this.required) {
+        const requiredError = this.errors.filter((error: KeyValuePair<ValidatorType, string>) => {
+          return error.key == ValidatorType.Required;
+        });
+        if (requiredError.length > 0) {
+          return requiredError[0].value;
+        }
+      }
+
+      if (this.formGroup.controls[this.controlName].hasError('pattern')) {
+        const patternError = this.errors.filter((error: KeyValuePair<ValidatorType, string>) => {
+          return error.key == ValidatorType.Pattern;
+        });
+        if (patternError.length > 0) {
+          return patternError[0].value;
+        }
+      }
+
+      if (this.inputType == InputType.PasswordConfirm && this.formGroup.hasError('custom')) {
+        const customError = this.errors.filter((error: KeyValuePair<ValidatorType, string>) => {
+          return error.key == ValidatorType.Custom;
+        });
+        if (customError.length > 0) {
+          return customError[0].value;
+        }
+      }
+    }
+
     return this.required && this.label != null ? `${this.label} is required` : null;
   }
 
@@ -165,7 +205,4 @@ export class FormGroupComponent implements OnInit, OnChanges {
     return false;
   }
 
-  preventKeyPress(event): void {
-    event.preventDefault();
-  }
 }

@@ -1,0 +1,37 @@
+<form [formGroup]="formGroup" (ngSubmit)="submit()" class="form-horizontal" novalidate="" *ngIf="formGroup">
+  <div class="card card-default w-75" *ngIf="formGroup">
+    <div class="card-header">
+      <div class="header-block">
+        <p class="title">
+          Personal Details
+        </p>
+      </div>
+    </div>
+    <div class="card-body">
+      <app-form-group [label]="'Name'" [formGroup]="formGroup"
+                      [inputType]="inputType.Text"
+                      [controlName]="'name'"></app-form-group>
+      <app-form-group [label]="'Surname'" [formGroup]="formGroup"
+                      [inputType]="inputType.Text"
+                      [controlName]="'surname'"></app-form-group>
+      <app-form-group [label]="'Cellphone Number'" [formGroup]="formGroup"
+                      [inputType]="inputType.Text"
+                      [controlName]="'cellphoneNumber'"></app-form-group>
+      <app-form-group [label]="'Email'"
+                      [inputType]="inputType.Email"
+                      [formGroup]="formGroup"
+                      [controlName]="'emailAddress'"></app-form-group>
+      <app-form-group [label]="'Password'"
+                      [formGroup]="formGroup"
+                      [controlName]="'password'"
+                      [inputType]="inputType.Password"
+                      [errors]="passwordErrors"></app-form-group>
+      <app-form-group [label]="'Confirm password'"
+                      [formGroup]="formGroup"
+                      [controlName]="'confirmPassword'"
+                      [inputType]="inputType.PasswordConfirm"
+                      [errors]="confirmPasswordErrors"></app-form-group>
+      <app-submit-button [formGroup]="formGroup"></app-submit-button>
+    </div>
+  </div>
+</form>

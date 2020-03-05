@@ -1,0 +1,29 @@
+<div class="row" *ngIf="formGroup">
+  <div class="col-sm-12">
+    <form [formGroup]="formGroup" class="form-horizontal">
+      <div class="card card-default">
+        <div class="card-header">
+          <div class="header-block">
+            <p class="title">Personal Details</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <app-form-group [label]="'Name'" [formGroup]="formGroup" [controlName]="'name'"
+                          readonly="true"></app-form-group>
+          <app-form-group [label]="'Surname'" [formGroup]="formGroup" [controlName]="'surname'"
+                          readonly="true"></app-form-group>
+          <app-form-group [label]="'Email'" [formGroup]="formGroup" [controlName]="'emailAddress'"
+                          readonly="true"></app-form-group>
+          <app-form-group [label]="'Cellphone'" [formGroup]="formGroup" [controlName]="'cellphoneNumber'"
+                          readonly="true"></app-form-group>
+          <div class="form-group row">
+            <div class="offset-sm-2 col-sm-10">
+              <a class="btn btn-secondary" [routerLink]="['/edit-profile']">Edit Profile</a>&nbsp;&nbsp;
+              <a class="btn btn-secondary" [routerLink]="['/change-password']">Change Password</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
