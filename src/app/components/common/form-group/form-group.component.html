@@ -1,4 +1,4 @@
-<div class="form-horizontal">
+<div class="form-horizontal" *ngIf="formGroup">
   <div [ngClass]="{'form-group':true, 'row':!verticalForm, 'zero-margins':readonly}">
     <label [className]="verticalForm?'':'col-form-label col-sm-'+(12-inputCols)">{{label + (verticalForm ? '' : ':')}}</label>
     <div [className]="verticalForm?'':'col-sm-'+ inputCols">

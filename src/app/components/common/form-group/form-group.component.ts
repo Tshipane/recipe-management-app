@@ -1,14 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild
-} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TypeUtility} from '../../../services/utilities/type-utility';
 import {InputType} from '../models/input-type';
@@ -69,6 +59,7 @@ export class FormGroupComponent implements OnInit, OnChanges {
     this.fireOnChange = true;
     this.verticalForm = false;
     this.errors = [];
+    this.inputType = InputType.Text;
   }
 
   ngOnInit() {

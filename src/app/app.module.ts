@@ -16,6 +16,10 @@ import { UiOverlayComponent } from './components/common/ui-overlay/ui-overlay.co
 import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { UserDetailsComponent } from './components/users/user-details/user-details.component';
 import { ChangePasswordComponent } from './components/auth/change-password/change-password.component';
+import { AddRecipeStepComponent } from './components/recipes/add-recipe-step/add-recipe-step.component';
+import { ModalTriggerDirective } from './directives/modal-trigger.directive';
+import { ConfirmComponent } from './components/common/confirm/confirm.component';
+import { KeepHtmlPipe } from './pipes/keep-html.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,11 @@ import { ChangePasswordComponent } from './components/auth/change-password/chang
     UiOverlayComponent,
     SignUpComponent,
     UserDetailsComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    AddRecipeStepComponent,
+    ModalTriggerDirective,
+    ConfirmComponent,
+    KeepHtmlPipe
   ],
   imports: [
     BrowserModule,

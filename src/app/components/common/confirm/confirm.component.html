@@ -1,0 +1,33 @@
+<div [id]="modalId" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          <i class="fa fa-times text-danger"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <div class="alert alert-info" [innerHTML]="message|keepHtml">
+              </div>
+            </div>
+          </div>
+          <app-form-group [label]="commentLabel" *ngIf="includeComment"
+                          [formGroup]="formGroup"
+                          controlName="comment"
+                          [inputType]="inputType.TextArea"></app-form-group>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!active()" (click)="confirm()">
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

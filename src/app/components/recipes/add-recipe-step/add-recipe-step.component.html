@@ -1,0 +1,27 @@
+<div [id]="modalId" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Recipe Step</h4>
+        <button type="button" class="close" data-dismiss="modal">
+          <i class="fa fa-times text-danger"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-horizontal">
+          <app-form-group [label]="'Description'"
+                          [formGroup]="formGroup"
+                          controlName="description"
+                          [inputType]="inputType.TextArea"></app-form-group>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" *ngIf="formGroup.valid" (click)="add()">
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

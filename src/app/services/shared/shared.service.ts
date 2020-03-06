@@ -111,9 +111,11 @@ export class SharedService {
   }
 
   setPageTitle(title: string): void {
-    this._pageTitle = title;
-    const browserTitle = title == null ? 'Recipe Management' : `${title} - Recipe Management`;
-    this.titleService.setTitle(browserTitle);
+    setTimeout(() => {
+      this._pageTitle = title;
+      const browserTitle = title == null ? 'Recipe Management' : `${title} - Recipe Management`;
+      this.titleService.setTitle(browserTitle);
+    });
   }
 
   get pageTitle(): string {

@@ -1,1 +1,24 @@
-<p>recipes works!</p>
+<div class="row">
+  <div class="col-sm-12">
+    <a class="btn btn-secondary" [routerLink]="['/recipes','add']">Add Recipe</a>
+    <div class="vertical-spacer"></div>
+    <div class="table-responsive">
+      <table class="table" *ngIf="recipes && recipes.length">
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let recipe of recipes">
+          <td>{{recipe.title}}</td>
+          <td>
+            <a [routerLink]="['/recipes',recipe.recipeId]">Details</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

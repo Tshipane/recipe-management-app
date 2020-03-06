@@ -1,1 +1,57 @@
-<p>edit-recipe works!</p>
+<div class="row" *ngIf="formGroup">
+  <div class="col-sm-12">
+    <form [formGroup]="formGroup" class="form-horizontal" (ngSubmit)="submit()" novalidate="">
+      <div class="card card-default">
+        <div class="card-header">
+          <div class="header-block">
+            <p class="title">Recipe</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <app-form-group [label]="'Title'" [formGroup]="formGroup" [controlName]="'title'"></app-form-group>
+          <app-form-group [label]="'Description'" [formGroup]="formGroup"
+                          [inputType]="inputType.TextArea"
+                          [controlName]="'description'"></app-form-group>
+          <app-form-group [label]="'Notes'" [formGroup]="formGroup"
+                          [inputType]="inputType.TextArea"
+                          [controlName]="'notes'"></app-form-group>
+          <div class="form-group row">
+            <div class="col-sm-12">
+              <table class="table w-50">
+                <thead>
+                <tr>
+                  <th colspan="3">Steps</th>
+                </tr>
+                <tr>
+                  <th>#</th>
+                  <th>Description</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let step of recipe.steps; let i=index">
+                  <td>{{i + 1}}</td>
+                  <td>{{step.description}}</td>
+                  <td>
+                    <a role="button" (click)="removeRecipeStep(i)">
+                      <i class="fas fa-times text-danger"></i>
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <a role="button" class="btn btn-primary" [appModalTrigger]="'addRecipeStepModal'">Add Step</a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <app-submit-button [formGroup]="formGroup"></app-submit-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-add-recipe-step [modalId]="'addRecipeStepModal'" (added)="recipeStepAdded($event)"></app-add-recipe-step>
