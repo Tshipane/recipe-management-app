@@ -37,11 +37,15 @@ export class EditUserComponent implements OnInit {
   }
 
   submit(): void {
-    const user = this.formGroup.value;
+    const user = this.formGroup.value as User;
     user.userId = this.sharedService.user.userId;
     this.sharedService.setFormSubmitting();
     this.userService.addOrUpdateUser(user).subscribe((postResult: PostResult) => {
       if (postResult.success) {
+        this.user.name = user.name;
+        this.user.surname = user.surname;
+        this.user.cellphoneNumber = user.cellphoneNumber;
+        this.user.emailAddress = user.emailAddress;
         this.router.navigate(['/profile']);
         this.toastrMessageService.success('Profile updated successfully', 5000);
         this.sharedService.clearFormSubmitting();
