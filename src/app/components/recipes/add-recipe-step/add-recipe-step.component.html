@@ -1,9 +1,12 @@
-<div [id]="modalId" class="modal fade" role="dialog">
+<div [id]="modalId" class="modal fade" role="dialog" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Add Recipe Step</h4>
-        <button type="button" class="close" data-dismiss="modal">
+        <h4 class="modal-title">
+          <span *ngIf="!editedDescription">Add Recipe Step</span>
+          <span *ngIf="editedDescription">Update Recipe Step</span>
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" (click)="cancel()">
           <i class="fa fa-times text-danger"></i>
         </button>
       </div>
@@ -16,9 +19,10 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">Cancel</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" *ngIf="formGroup.valid" (click)="add()">
-          Add
+          <span *ngIf="!editedDescription">Add</span>
+          <span *ngIf="editedDescription">Update</span>
         </button>
       </div>
     </div>

@@ -20,6 +20,7 @@ export class EditRecipeComponent implements OnInit {
   recipe: Recipe;
   formGroup: FormGroup;
   edit: boolean;
+  editedRecipeStep: RecipeStep;
 
   constructor(private recipeService: RecipeService,
               public sharedService: SharedService,
@@ -89,6 +90,19 @@ export class EditRecipeComponent implements OnInit {
   }
 
   recipeStepAdded(recipeStep: RecipeStep): void {
-    this.recipe.steps.push(recipeStep);
+    if (this.editedRecipeStep) {
+      this.editedRecipeStep.description = recipeStep.description;
+      this.editedRecipeStep = null;
+    } else {
+      this.recipe.steps.push(recipeStep);
+    }
+  }
+
+  setEditedStep(recipeStep: RecipeStep): void {
+    this.editedRecipeStep = recipeStep;
+  }
+
+  editStepCancelled(): void {
+    this.editedRecipeStep = null;
   }
 }
